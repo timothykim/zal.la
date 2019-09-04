@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import MainBar from "components/MainBar";
-import UrlBox from 'components/UrlBox';
+import UrlBox from "components/UrlBox";
 import 'styles/App.css';
 import * as styles from 'styles';
 
