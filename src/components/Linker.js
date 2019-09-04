@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
+import firebase from "modules/Firebase";
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
 import {handleComplete, handleError, setUrl} from "actions/Linker";
-import firebase from "modules/Firebase";
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as styles from 'styles.js';
