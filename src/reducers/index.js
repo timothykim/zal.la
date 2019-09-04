@@ -1,6 +1,8 @@
 import {combineReducers} from "redux";
-import URLBoxReducer from 'reducers/URLBox';
+import UrlBoxReducer from 'reducers/UrlBox';
+import LinkerReducer from 'reducers/Linker';
 
 export default combineReducers({
-  URLBox: URLBoxReducer,
+  UrlBox: UrlBoxReducer,
+  Linker: LinkerReducer,
 });

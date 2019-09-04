@@ -1,8 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import App from 'components/App';
-import URLBox from "components/URLBox";
-import {NotificationBar} from "components/PrimarySearchAppBar";
+import URLBox from "components/UrlBox";
+import {NotificationBar} from "components/MainBar";
 
 let wrapped;
 

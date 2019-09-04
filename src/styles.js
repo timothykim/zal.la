@@ -19,6 +19,7 @@ export const app = {
   button: {
     margin: '1vh',
     backgroundColor: "#5b6bc0",
+    width: '20vh',
   },
 };
 

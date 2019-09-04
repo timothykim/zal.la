@@ -1,29 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch} from 'react-router-dom'
 import { Provider } from 'react-redux';
-import { createStore} from "redux";
-import reducers from 'reducers';
-
 import * as serviceWorker from 'serviceWorker';
+
 import App from 'components/App';
 import Linker from 'components/Linker';
-import * as config from 'config';
-import Firebase from 'modules/Firebase';
+import store from "store";
+import firebase from 'modules/Firebase';
 
-
-const firebase = new Firebase(config.firebase);
-const store = createStore(reducers, {});
 const routes = (
   <Provider store={store}>
     <Router>
-      <div>
-        <Route
-          path="/" exact
-          render={(props) => <App {...props} firebase={firebase} />}
-        />
-        <Route path="/:code" component={Linker}></Route>
-      </div>
+      <Switch>
+        <Route exact={true}
+               path="/"
+               render={(props) => <App {...props} firebase={firebase} />} />
+        <Route exact={true}
+               path="/result"
+               component={App} />
+        <Route path="/:code" component={Linker} />
+      </Switch>
     </Router>
   </Provider>
 );

@@ -1,41 +1,33 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import * as styles from 'styles';
 
-export default class CopyButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      copied: false,
-      text: this.props.text,
-    };
-  }
+const CopyButton = props => {
+  const [isComplete, setIsComplete] = useState(false);
+  const [message, setMessage] = useState('Copy to clipboard');
 
-  copyToClipboard = () => {
-    let dummy = document.createElement("input");
-    document.body.appendChild(dummy);
-    dummy.setAttribute('value', this.props.url);
-    dummy.select();
+  const saveToClipboard = () => {
+    let element = document.createElement("input");
+    document.body.appendChild(element);
+    element.setAttribute('value', props.url);
+    element.select();
     document.execCommand('copy');
-    document.body.removeChild(dummy);
-    this.setState({
-      copied: true,
-      text: "Copied to clipboard!"
-    })
+    document.body.removeChild(element);
+    setIsComplete(true);
+    setMessage("Copied");
   };
 
-  render() {
-    return (
-      <Button
-        url={this.props.url}
-        variant="contained"
-        color="primary"
-        style={styles.app.button}
-        disabled={document.queryCommandEnabled('copy')}
-        onClick={!this.state.copied && this.copyToClipboard}
-        href={null}>
-        {this.state.text}
-      </Button>
-    );
-  }
-}
+  return (
+    <Button url={props.url}
+            variant="contained"
+            color="primary"
+            style={styles.app.button}
+            disabled={document.queryCommandEnabled('copy')}
+            onClick={!isComplete ? saveToClipboard : undefined}
+            href={null}>
+      {message}
+    </Button>
+  );
+};
+
+export default CopyButton

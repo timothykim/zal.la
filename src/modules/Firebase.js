@@ -1,13 +1,13 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/database';
-import URL from 'url';
 import {Shrinker} from "lib/Shrinker";
+import * as config from 'config';
 
-export default class Firebase {
+class Firebase {
   constructor(config) {
     this.fb = firebase.initializeApp(config);
     this.db = firebase.database();
-    this.prefix = "sh-nk.me/";
+    this.prefix = "zal.la/";
     this.shrinker = new Shrinker();
   }
 
@@ -65,25 +65,17 @@ export default class Firebase {
   };
 
   expand = (code) => {
-    let url;
     let id = this.shrinker.decode(code);
     return new Promise((resolve, reject) => {
       this.db.ref(`urls/${id}`).once('value', (snapshot) => {
-        if (snapshot.val() && snapshot.val().url) {
-          url = snapshot.val().url;
-          if (!url.includes('http://') || !url.includes('https://')) {
-            url = `https://${url}`;
-          }
-          try {
-            new URL(url);
-            resolve(url);
-          } catch (err) {
-            reject(null)
-          }
+        if (snapshot.val()) {
+          resolve(snapshot.val());
         } else {
-          reject(null);
+          reject("This URL is not available");
         }
       });
     });
   };
 }
+
+export default new Firebase(config.firebase);
