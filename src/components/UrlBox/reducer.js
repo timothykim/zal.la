@@ -1,4 +1,4 @@
-import {ON_ERROR, ON_URL_CHANGE, ON_ACQUIRING_SHORT_URL, ON_VIEW_CHANGE, ON_REDIRECT} from "actions/types/UrlBox";
+import {ON_ERROR, ON_URL_CHANGE, ON_ACQUIRING_SHORT_URL, ON_VIEW_CHANGE, ON_REDIRECT} from 'components/UrlBox/types';
 
 const INITIAL_STATE = {
   view: "default",

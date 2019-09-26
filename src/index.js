@@ -4,8 +4,8 @@ import { Route, BrowserRouter as Router, Switch} from 'react-router-dom'
 import { Provider } from 'react-redux';
 import * as serviceWorker from 'serviceWorker';
 
-import App from 'components/App';
-import Linker from 'components/Linker';
+import Root from "./containers/Root";
+import Linker from 'components/Linker/Linker';
 import store from "store";
 import firebase from 'modules/Firebase';
 
@@ -15,10 +15,10 @@ const routes = (
       <Switch>
         <Route exact={true}
                path="/"
-               render={(props) => <App {...props} firebase={firebase} />} />
+               render={(props) => <Root {...props} firebase={firebase} />} />
         <Route exact={true}
                path="/result"
-               component={App} />
+               component={Root} />
         <Route path="/:code" component={Linker} />
       </Switch>
     </Router>

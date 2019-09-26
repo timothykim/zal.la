@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import App from 'components/App';
+import Root from 'containers/Root';
 import URLBox from "components/UrlBox";
 import {NotificationBar} from "components/MainBar";
 

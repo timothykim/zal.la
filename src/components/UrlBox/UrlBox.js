@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Redirect} from 'react-router-dom';
 import firebase from "modules/Firebase";
-import {setUrl, setShortUrl, setView, handleError, handleRedirect} from "actions/UrlBox";
+import {setUrl, setShortUrl, setView, handleError, handleRedirect} from "components/UrlBox/actions";
 
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -16,6 +16,7 @@ import * as styles from 'styles';
 const UrlBox = props => {
   const handleChange = event => props.setUrl(event.target.value);
   const handleEnter = event => event.key === 'Enter' && handleSubmit();
+  // fix this so it doesn't change view but loads Result container
   const handleSubmit = () => {
     let url = props.url;
     if (!url.includes('https://') || !url.includes('http://')) {
@@ -38,7 +39,6 @@ const UrlBox = props => {
   };
 
   useEffect(() => {
-    console.log(props);
     if (props.history.action === 'POP' && props.history.location.pathname === '/') {
       props.setView('default');
       props.handleRedirect('/');
@@ -50,23 +50,24 @@ const UrlBox = props => {
   return (
     <div className="URLBox">
       {props.view === 'default' &&
-      <div>
-        <TextField
-          autoFocus={true}
-          label={props.label}
-          onChange={handleChange}
-          onKeyDown={handleEnter}
-          error={props.error}/>
-        &nbsp;
-        <Button
-          variant="contained"
-          color="primary"
-          style={styles.app.button}
-          href={null}
-          onClick={handleSubmit}>
-          Go
-        </Button>
-      </div>}
+        <div>
+          <TextField
+            autoFocus={true}
+            label={props.label}
+            onChange={handleChange}
+            onKeyDown={handleEnter}
+            error={props.error}/>
+          &nbsp;
+          <Button
+            variant="contained"
+            color="primary"
+            style={styles.app.button}
+            href={null}
+            onClick={handleSubmit}>
+            Go
+          </Button>
+        </div>
+      }
       {props.view === 'result' &&
       <div style={styles.app.content}>
         {props.shortUrl === '' && <CircularProgress/>}

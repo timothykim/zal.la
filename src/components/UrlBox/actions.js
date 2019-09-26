@@ -1,6 +1,6 @@
-import {ON_ERROR, ON_URL_CHANGE, ON_ACQUIRING_SHORT_URL, ON_VIEW_CHANGE, ON_REDIRECT} from "actions/types/UrlBox";
+import {ON_ERROR, ON_URL_CHANGE, ON_ACQUIRING_SHORT_URL, ON_VIEW_CHANGE, ON_REDIRECT} from "components/UrlBox/types";
 
-// action generators
+// actions generators
 export const setUrl = (url) => {
   return {
     type: ON_URL_CHANGE,

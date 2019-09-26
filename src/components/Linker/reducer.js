@@ -1,4 +1,4 @@
-import {ON_URL_RETRIEVAL, ON_COMPLETE, ON_ERROR} from "actions/types/Linker";
+import {ON_URL_RETRIEVAL, ON_COMPLETE, ON_ERROR} from "components/Linker/types";
 
 const INITIAL_STATE = {
   isComplete: false,

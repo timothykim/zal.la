@@ -2,12 +2,23 @@ import React, {useEffect} from 'react';
 import firebase from "modules/Firebase";
 import {connect} from 'react-redux';
 import {Redirect, withRouter} from 'react-router-dom';
-import {handleComplete, handleError, setUrl} from "actions/Linker";
+import {handleComplete, handleError, setUrl} from "components/Linker/actions";
 
 import CircularProgress from '@material-ui/core/CircularProgress';
-import * as styles from 'styles.js';
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    height: '100vh',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+}));
 
 const Linker = props => {
+  const classes = useStyles();
+
   useEffect(() => {
     setTimeout(() => {
       firebase.expand(props.match.params.code)
@@ -27,7 +38,7 @@ const Linker = props => {
   }, [props.match.params.code]);
 
   return (
-    <div style={styles.linker}>
+    <div className={classes.root}>
       {props.isError && <Redirect to={{pathname: "/", state: {bar:{show: true, msg: "No URL found"}}}} />}
       {!props.isComplete && <CircularProgress /> }
     </div>

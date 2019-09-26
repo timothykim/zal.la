@@ -1,10 +1,3 @@
-export const linker = {
-  display: 'flex',
-  height: '100vh',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
-
 export const app = {
   container: {
     justifyContent: 'center',

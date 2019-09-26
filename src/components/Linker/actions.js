@@ -1,4 +1,4 @@
-import {ON_COMPLETE, ON_ERROR, ON_URL_RETRIEVAL} from "actions/types/Linker";
+import {ON_COMPLETE, ON_ERROR, ON_URL_RETRIEVAL} from "components/Linker/types";
 
 export const handleComplete = isComplete => {
   return {

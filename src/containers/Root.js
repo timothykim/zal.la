@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const App = () => {
+const Root = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -34,4 +34,4 @@ const App = () => {
   );
 };
 
-export default connect()(App);
+export default connect()(Root);
