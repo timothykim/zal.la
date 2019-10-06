@@ -22,31 +22,27 @@ router.get('/link/', (req, res) => {
   })
 });
 
+const getLast24HoursQuery = (now) => (
+  word: word,
+  updatedAt: {
+    $gt: new Date(now - 24*60*60 * 1000)
+  }
+});
+
+const serveLink = (res, link) => res.status(200).json({success: true, ... link});
+const serveBadRequest = (res) => res.status(400).json({success: false, error: "duplicate value"})
+const serveServerError = (res) => res.status(500).json({success: false, error: err})
+
 router.post('/link', (req, res) => {
   const {word, url} = req.body;
-  const link = Link({word: word, url: url});
+  const link = Link();
 
-  Link.findOne({word: word}, (err, data) => {
-    if (data) {
-      if (pastHour(data.updatedAt)) {
-        Link.update({_id: data._id}, {$set: {url: link.url}}, {upsert: true}, err => {
-          if (err) {
-            return res.status(500).json({success: false, error: err});
-          }
-          return res.status(200).json({success: true, word: word, url: url, updatedAt: data.updatedAt});
-        });
-      } else {
-        return res.status(500).json({success: false, error: "duplicate value"});
-      }
-    } else {
-      link.save(err => {
-        if (err) {
-          return res.status(500).json({success: false, error: err});
-        }
-        return res.status(200).json({success: true, word: word, url: url, updatedAt: Date.now()});
-      });
-    }
-  });
+  const query = Link.findOne(getLast24HoursQuery(Date.now()).exec();
+  query.then(link => link ? Promise.reject(link) : null) // if we find a link then it's error!
+       .then(() => Link.findOneAndUpdate({word: word}, {word: word, url: url}, {upsert: true}).exec())
+       .then(link => serveLink(res, link))
+       .catch(error => if (error.word) serveBadRequest())
+                       else serveServerError());
 });
 
 router.delete('/link', (req, res) => {
